@@ -25,7 +25,7 @@ As the COVID-19 outbreak began,
 
 ## Future Work <a name ="future"> </a>
 
->1. DThe Number One Reason White Men Give For Not Getting Involved With Diversity and Inclusion
+>1. D
 >2. Rer
 
 <br></br>
