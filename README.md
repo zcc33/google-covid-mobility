@@ -1,16 +1,22 @@
-# Google Covid Mobility Data
+# Covid Mobility Trends
 
 ## Table of Contents
 
-1. [Overview](#Overview)
-2. [Future Work](#future)
+1. [Overview](#overview)
+2. [Description of Data](#description)
+3. [Data Processing](#processing)
+4. [Overall Mobility Trends (US)](#overall)
+5. [State-Level Example (MD)](#state)
+7. [Comparison of Immobility Across States](#comparison)
+8. [Hypothesis Testing for "Granger Causality"](#testing)
+9. [Future Work](#future)
 
 
 
-## Overview
-As the COVID-19 outbreak began, 
+## Overview <a name ="overview"> </a>
+The COVID-19 outbreak disrupted almost every facet of people's lives, an in particular their daily movement patterns. As part of COVID-19 Open Data Set, Google has released 
 
-## Description of Data
+## Description of Data <a name ="description"> </a>
 
 | Variable | Description |
 | --- | --- |
@@ -21,26 +27,26 @@ As the COVID-19 outbreak began,
 | mobility_workplaces | |
 | mobility_residential | | 
 
-## Data Processing
+## Data Processing <a name ="processing"> </a>
 
 
 
-## US Overrall Trends
+## Overall Mobility Trends (US) <a name ="overall"> </a>
 ![](img/us_mobility_all.png)
 
 
-## Maryland Specific Trends
+## Specific State-Level Example <a name ="state"> </a>
 
 ![](img/md_mobility_specific.png)
 
-## Immobility score by state
+## Comparison of Immobility Across States <a name ="comparison"> </a>
 
 ## Hypothesis Testing for "Granger Causuality"
 In general it's difficult to conduct hypothesis testing on time series because each data point is clearly not independent from other data points. We 
 
 >Null hypothesis: 
 
-### Granger Causality testing with raw time series
+### Granger Causality testing with raw time series <a name ="testing"> </a>
 | Lag value | p-value (raw series)| p-value (differenced series) |
 | --- | --- | ---|
 | 1 | 0.0310| 0.0000 |
@@ -83,6 +89,8 @@ In general it's difficult to conduct hypothesis testing on time series because e
 1. https://console.cloud.google.com/marketplace/product/bigquery-public-datasets/covid19-open-data
 2. https://github.com/GoogleCloudPlatform/covid-19-open-data
 3. https://www.google.com/covid19/mobility/
+4. https://en.wikipedia.org/wiki/Granger_causality
+5. https://stackoverflow.com/questions/19726663/how-to-save-the-pandas-dataframe-series-data-as-a-figure
 
 https://www.markdownguide.org/basic-syntax/
 

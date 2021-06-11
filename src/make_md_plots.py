@@ -42,7 +42,7 @@ if __name__ == "__main__":
     date_window = pd.date_range(start = "2020-01-01", end = "2021-06-8")
     df_plot=df.loc[date_window,:]
     fig, axs = plt.subplots(3, sharex=True, figsize=(10,12),dpi=400)
-    fig.suptitle("Specific Trends for Maryland (US_MD)", size = 20)
+    fig.suptitle('State-Level Trends for Maryland (US_MD)', size = 16)
 
     axs[0].plot(df_plot.index, df_plot[["mobility_retail_and_recreation"]])
     axs[0].set_xlabel("")
