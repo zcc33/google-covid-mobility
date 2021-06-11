@@ -19,7 +19,7 @@ def normalize_scores(df):
 
 def clean_data(df):
     df[mobility] = df[mobility].interpolate(limit=2)
-    df[restrictions] = df[restrictions].fillna(method="ffill", limit=5)
+    df[restrictions] = df[restrictions].fillna(method="ffill", limit=7)
     df[virus] = df[virus].interpolate(limit=2)
 
     for i in range(1,df.shape[0]):
@@ -44,7 +44,7 @@ def render_mpl_table(data, col_width=3.0, row_height=0.625, font_size=14,
                      ax=None, **kwargs):
     if ax is None:
         size = (np.array(data.shape[::-1]) + np.array([0, 1])) * np.array([col_width, row_height])
-        fig, ax = plt.subplots(figsize=size)
+        fig, ax = plt.subplots(figsize=size, dpi=400)
         ax.axis('off')
     mpl_table = ax.table(cellText=data.values, bbox=bbox, colLabels=data.columns, cellLoc = "left", **kwargs)
     mpl_table.auto_set_font_size(False)
@@ -90,6 +90,13 @@ if __name__ == "__main__":
     state_df=state_df[["name", "immobility_score", "immobility_index", "avg_stringency"]]
 
     fig,ax = render_mpl_table(state_df, header_columns=0, col_width=3.5)
-    fig.savefig("../img/state_comparison.png", bbox_inches='tight')
+    fig.savefig("../img/state_comparison.png", dpi=400, bbox_inches='tight')
 
+    fig,ax = render_mpl_table(state_df.head(10), header_columns=0, col_width=3.5)
+    ax.set_title("Top 10 States by Immobility Score", fontsize=18, fontweight='bold')
+    fig.savefig("../img/state_comparison_head.png", dpi=400, bbox_inches='tight')
+
+    fig,ax = render_mpl_table(state_df.tail(10), header_columns=0, col_width=3.5)
+    ax.set_title("Bottom 10 States by Immobility Score", fontsize=18, fontweight='bold')
+    fig.savefig("../img/state_comparison_tail.png", dpi=400, bbox_inches='tight')
     

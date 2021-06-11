@@ -5,7 +5,7 @@
 1. [Overview](#Overview)
 2. [Future Work](#future)
 
-![Tux, the Linux mascot](img/sample.gif#center)
+![Tux, the Linux mascot](img/state_comparison.png)
 
 ## Overview
 As the COVID-19 outbreak began, 
@@ -24,7 +24,28 @@ As the COVID-19 outbreak began,
 ## EDA
 
 
+## Hypothesis Testing for "Granger Causuality"
+In general it's difficult to conduct hypothesis testing on time series because each data point is 
 
+| Lag period | p-value |
+| --- | --- |
+| 1 | 0.0310|
+| 2 | 0.0003|
+| 3 | 0.0000|
+| 4 | 0.0001|
+| 5 | 0.0002|
+| 6 | 0.0008|
+| 7 | 0.0010|
+
+| Lag period | p-value |
+| --- | --- |
+| 1 | 0.0000|
+| 2 | 0.0000|
+| 3 | 0.0000|
+| 4 | 0.0000|
+| 5 | 0.0001|
+| 6 | 0.0002|
+| 7 | 0.0000|
 
 ## Future Work <a name ="future"> </a>
 
