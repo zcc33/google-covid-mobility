@@ -32,13 +32,13 @@ The COVID-19 Open Data Set contains daily time series data of over 500 variables
 | mobility_residential | Places of residence | Percent (%) change in  time spent |
 | stringency_index | Overall severity of government controls, such as school/work closings, transport shutdowns, public event cancellations, restrictions on gatherings, etc. | An index from 0 (least severe) to 100 (most severe) |
 
-There are three important limitations of the mobility data.
+### Limitations of the Data
 
-The first is that these are cell phone data gathered from smart phone users who have Google Location Tracking enabled. This may not be representative of those who do not own smart phones, those who have not enabled Google Location Tracking, those who do not use Google services, and those who go to places where cell phones are not needed or not allowed.
+1. These are cell phone data gathered from smart phone users who have Google Location Tracking enabled. This may not be representative of those who do not own smart phones, those who have not enabled Google Location Tracking, those who do not use Google services, and those who go to places where cell phones are not needed or not allowed.
 
-Secondly, we do not have access to absolute values, but rather only percentage change compared to a fixed baseline. This baseline was in the month of January 2020, immediately preceding the pandemic. Since this baseline was in the middle of winter, mobility changes thereafter would likely be influenced by the weather as well as the impacts of the pandemic. For example, it is hard to tell how much the increase in Park visits during June 2020 was due to the lockdowns, versus the warmer weather. So one should be careful about comparing across different times of the year (in addition to other factors like holidays, region-specific events, etc.)
+2. We do not have access to absolute values, but rather only percentage change compared to a fixed baseline. This baseline was in the month of January 2020, immediately preceding the pandemic. Since this baseline was in the middle of winter, mobility changes thereafter would likely be influenced by the weather as well as the impacts of the pandemic. For example, it is hard to tell how much the increase in Park visits during June 2020 was due to the lockdowns, versus the warmer weather. So one should be careful about comparing across different times of the year (in addition to other factors like holidays, region-specific events, etc.)
 
-Thirdly, categorizations and accuracy are somewhat location-specific. One should be careful about directly comparing regions which are far apart and/or very different in culture.
+3. Categorizations and accuracy are somewhat location-specific. One should be careful about directly comparing regions which are far apart and/or very different in culture.
 
 ## Data Processing <a name ="processing"> </a>
 The processing of the data could be roken dow
@@ -60,7 +60,8 @@ When graphing the overall mobility trends for the US, we see that
 
 ## Comparison of Immobility Across States <a name ="comparison"> </a>
 
-
+![](img/state_comparison_head.png)
+![](img/state_comparison_tail.png)
 
 ## Hypothesis Testing for Granger causuality <a name ="testing"> </a>
 In general it's difficult to conduct hypothesis tests on time series because the data points are not independent of each other. However, there is a testable notion called "Granger causality" which was developed specifically for time series. 
@@ -95,24 +96,9 @@ We see that all the p-values are low enough to reject the null hypothesis indivi
 1. It would be interesting
 2.  
 
-
 &nbsp;
 &nbsp;
-
 <br></br>
-
-
-* Unordered
-    * List
-
-*  This is the first list item.
-*  Here's the second list item.
-
-    > A blockquote would look great below the second list item.
-
-*   And here's the third list item.
-
-**bold**
 
 ## References
 
