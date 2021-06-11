@@ -1,4 +1,4 @@
-# Covid Mobility Trends
+# COVID Mobility Trends
 
 ## Table of Contents
 
@@ -43,8 +43,8 @@ Thirdly, categorizations and accuracy are somewhat location-specific. One should
 ## Data Processing <a name ="processing"> </a>
 The processing of the data could be roken dow
 
-1. Time series
-2. Missing values
+1. Time series Smoothing - The mobility data 
+2. Missing Values Interpolation - 
 3. 
 
 
@@ -121,32 +121,3 @@ We see that all the p-values are low enough to reject the null hypothesis indivi
 3. https://www.google.com/covid19/mobility/
 4. https://en.wikipedia.org/wiki/Granger_causality
 5. https://stackoverflow.com/questions/19726663/how-to-save-the-pandas-dataframe-series-data-as-a-figure
-
-https://www.markdownguide.org/basic-syntax/
-
-At the command prompt, type `nano`.
-
-$$f(x) = x^2$$
-
-***
-
-
-    <html>
-      <head>
-      </head>
-    </html>
-
-My favorite search engine is [Duck Duck Go](https://duckduckgo.com).
-
-<https://www.markdownguide.org>
-<fake@example.com>
-
-
-https://stackoverflow.com/questions/35498525/latex-rendering-in-readme-md-on-github
-
-![equation](https://latex.codecogs.com/gif.latex?f%28x%29%20%3D%20%5Cfrac%7B1%7D%7B2%7D) 
-
-
-This is [an example][1]
-
-[1]: http://www.google.com
