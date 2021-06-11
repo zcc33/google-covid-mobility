@@ -35,18 +35,26 @@ The COVID-19 outbreak disrupted almost every facet of people's lives, an in part
 ![](img/us_mobility_all.png)
 
 
-## Specific State-Level Example <a name ="state"> </a>
+## State-Level Example (MD) <a name ="state"> </a>
 
 ![](img/md_mobility_specific.png)
 
 ## Comparison of Immobility Across States <a name ="comparison"> </a>
 
-## Hypothesis Testing for "Granger Causuality"
-In general it's difficult to conduct hypothesis testing on time series because each data point is clearly not independent from other data points. We 
+## Hypothesis Testing for Granger causuality <a name ="testing"> </a>
+In general it's difficult to conduct hypothesis tests on time series because the data points are not independent of each other. However, there is a testable notion called "Granger causality" which was developed specifically for time series. 
 
->Null hypothesis: 
+>Definition: Time series A is said to Granger-cause timee series B if A contains predictive information about B beyond what is contained in the previous values of B.
 
-### Granger Causality testing with raw time series <a name ="testing"> </a>
+Note that, despite the name, Granger causality is far from implying true causality.
+
+We hypothesized that, across the United States, the stringency index (how it changes over time) would Granger-cause the mobility trends to retail locations we observe. In other words, changes in public policy (either tightening or loosening of restrictions) would contain predictive information about people's movement patterns, particularly to discretionary locations like retail.
+
+To do conduct the test, we used the `grangercausalitytests` function from the `statsmodels.tsa.stattools` module. We ran the tests on stringency index and retail mobility for the . Since the 
+
+
+>Null hypothesis: `stringency_index` does **not** Granger-cause `mobility_retail_and_recreation`. 
+
 | Lag value | p-value (raw series)| p-value (differenced series) |
 | --- | --- | ---|
 | 1 | 0.0310| 0.0000 |
@@ -57,11 +65,10 @@ In general it's difficult to conduct hypothesis testing on time series because e
 | 6 | 0.0008| 0.0002|
 | 7 | 0.0010| 0.0000|
 
+Our conclusion is that 
+
 
 ## Future Work <a name ="future"> </a>
-
-<br></br>
-
 1. It would be interesting
 2.  
 
