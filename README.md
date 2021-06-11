@@ -23,6 +23,9 @@ As the COVID-19 outbreak began,
 
 ## EDA
 
+
+
+
 ## Future Work <a name ="future"> </a>
 
 >1. DThe Number One Reason White Men Give For Not Getting Involved With Diversity and Inclusion
@@ -53,6 +56,10 @@ As the COVID-19 outbreak began,
 **bold**
 
 ## References
+
+1. https://console.cloud.google.com/marketplace/product/bigquery-public-datasets/covid19-open-data
+2. https://github.com/GoogleCloudPlatform/covid-19-open-data
+3. https://www.google.com/covid19/mobility/
 
 https://www.markdownguide.org/basic-syntax/
 
