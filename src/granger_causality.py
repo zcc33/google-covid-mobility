@@ -36,8 +36,12 @@ if __name__ == "__main__":
 
     date_window = pd.date_range(start = "2020-02-25", end = "2021-06-1")
     df_test=df.loc[date_window,:]
+
+    #grangercausalitytests(df_test[["mobility_retail_and_recreation", "stringency_index"]], maxlag=7)
+
     x = np.diff(df_test["mobility_retail_and_recreation"])[1:]
     y = np.diff(df_test["stringency_index"])[1:]
     data = {"x": x, "y": y}
     data_df = pd.DataFrame(data)
+
     grangercausalitytests(data_df, maxlag=7)

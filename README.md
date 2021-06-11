@@ -5,12 +5,12 @@
 1. [Overview](#Overview)
 2. [Future Work](#future)
 
-![Tux, the Linux mascot](img/state_comparison.png)
+
 
 ## Overview
 As the COVID-19 outbreak began, 
 
-## Dataset
+## Description of Data
 
 | Variable | Description |
 | --- | --- |
@@ -21,40 +21,42 @@ As the COVID-19 outbreak began,
 | mobility_workplaces | |
 | mobility_residential | | 
 
-## EDA
+## Data Processing
 
+
+
+## US Overrall Trends
+![](img/us_mobility_all.png)
+
+
+## Maryland Specific Trends
+
+![](img/md_mobility_specific.png)
+
+## Immobility score by state
 
 ## Hypothesis Testing for "Granger Causuality"
-In general it's difficult to conduct hypothesis testing on time series because each data point is 
+In general it's difficult to conduct hypothesis testing on time series because each data point is clearly not independent from other data points. We 
 
-| Lag period | p-value |
-| --- | --- |
-| 1 | 0.0310|
-| 2 | 0.0003|
-| 3 | 0.0000|
-| 4 | 0.0001|
-| 5 | 0.0002|
-| 6 | 0.0008|
-| 7 | 0.0010|
+>Null hypothesis: 
 
-| Lag period | p-value |
-| --- | --- |
-| 1 | 0.0000|
-| 2 | 0.0000|
-| 3 | 0.0000|
-| 4 | 0.0000|
-| 5 | 0.0001|
-| 6 | 0.0002|
-| 7 | 0.0000|
+### Granger Causality testing with raw time series
+| Lag value | p-value (raw series)| p-value (differenced series) |
+| --- | --- | ---|
+| 1 | 0.0310| 0.0000 |
+| 2 | 0.0003| 0.0000 |
+| 3 | 0.0000| 0.0000 |
+| 4 | 0.0001| 0.0000 |
+| 5 | 0.0002| 0.0001|
+| 6 | 0.0008| 0.0002|
+| 7 | 0.0010| 0.0000|
+
 
 ## Future Work <a name ="future"> </a>
 
->1. D
->2. Rer
-
 <br></br>
 
-1. 
+1. It would be interesting
 2.  
 
 
