@@ -2,41 +2,30 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import datetime
 import numpy as np
+from clean_data import clean_data
 
-def clean_data(df):
-    df[mobility] = df[mobility].interpolate(limit=2)
-    df[restrictions] = df[restrictions].fillna(method="ffill", limit=7)
-    df[virus] = df[virus].interpolate(limit=2)
+"""
+Creates plot of overall mobility trends for the US during the COVID outbreak.
 
-    for i in range(1,df.shape[0]):
-        previous = df["new_confirmed"].iloc[i-1]
-        current = df["new_confirmed"].iloc[i]
-        if not pd.isnull(previous) and not pd.isnull(current) and current < 0.05*previous:
-            df["new_confirmed"].iloc[i] = previous
-            
-    for i in range(1,df.shape[0]):
-        previous = df["cumulative_persons_fully_vaccinated"].iloc[i-1]
-        current = df["cumulative_persons_fully_vaccinated"].iloc[i]
-        if not pd.isnull(previous) and not pd.isnull(current) and current < 0.05*previous:
-            df["cumulative_persons_fully_vaccinated"].iloc[i] = previous
+Variables are daily time series representing percentage change from baseline (January 2020). Percentage
+change is calculated by day of the week. Note the heavy influence of seasonality since baseline was during
+winter. Choppiness from day-of-week was smoothed out by taking the 7-day moving average.
 
-    df[mobility] = df[mobility].rolling(7, center=True).mean()
-    df[virus] = df[virus].rolling(7, center=True).mean()
-
-
+Saves image as ../img/us_mobility_all.png
+"""
 
 if __name__ == "__main__":
-    mobility = ["mobility_retail_and_recreation", "mobility_grocery_and_pharmacy", "mobility_parks", "mobility_transit_stations", "mobility_workplaces", "mobility_residential"]
-    restrictions = ["school_closing", "workplace_closing", "cancel_public_events","restrictions_on_gatherings", "public_transport_closing", "stay_at_home_requirements", "restrictions_on_internal_movement", "stringency_index"]
-    virus = ["new_confirmed", "cumulative_persons_fully_vaccinated"]
-
+    #download and clean US data
     data_key = "US"
     df = pd.read_csv(f'https://storage.googleapis.com/covid19-open-data/v3/location/{data_key}.csv', parse_dates=["date"], index_col="date")
-    df=df[mobility+restrictions+virus]
-    clean_data(df)
+    df=clean_data(df)
 
+    #use time window Jan. 1 2020 to June 8 2021
     date_window = pd.date_range(start = "2020-01-01", end = "2021-06-8")
     df_plot=df.loc[date_window,:]
+
+    #plot all mobility variables against time during COVID outbreak
+    mobility = ["mobility_retail_and_recreation", "mobility_grocery_and_pharmacy", "mobility_parks", "mobility_transit_stations", "mobility_workplaces", "mobility_residential"]
     fig, ax = plt.subplots(figsize=(10,6),dpi=200)
     ax.plot(df_plot.index, df_plot[mobility])
     ax.set_xlabel("")
@@ -47,4 +36,5 @@ if __name__ == "__main__":
     plt.xticks(rotation=45)
     plt.axhline(y=0, color='black', linestyle='-', alpha=0.5)
     ax.text(0.065, 0.14, "Baseline Period:       January 2020", transform=ax.transAxes, fontsize=12, rotation=90)
+    
     fig.savefig("../img/us_mobility_all.png", dpi=400, bbox_inches='tight')

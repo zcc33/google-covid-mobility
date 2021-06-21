@@ -2,46 +2,43 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import datetime
 import numpy as np
+from clean_data import clean_data
 from statsmodels.tsa.stattools import grangercausalitytests
 
-def clean_data(df):
-    df[mobility] = df[mobility].interpolate(limit=2)
-    df[restrictions] = df[restrictions].fillna(method="ffill", limit=7)
-    df[virus] = df[virus].interpolate(limit=2)
+"""
+  Performs granger causality test on whether stringency_index contains predictive information
+  about mobility_retail_and_recreation. Contains option to perform test on differenced data to
+  reduce non-stationarity.
 
-    for i in range(1,df.shape[0]):
-        previous = df["new_confirmed"].iloc[i-1]
-        current = df["new_confirmed"].iloc[i]
-        if not pd.isnull(previous) and not pd.isnull(current) and current < 0.05*previous:
-            df["new_confirmed"].iloc[i] = previous
-            
-    for i in range(1,df.shape[0]):
-        previous = df["cumulative_persons_fully_vaccinated"].iloc[i-1]
-        current = df["cumulative_persons_fully_vaccinated"].iloc[i]
-        if not pd.isnull(previous) and not pd.isnull(current) and current < 0.05*previous:
-            df["cumulative_persons_fully_vaccinated"].iloc[i] = previous
+  Parameters:
+  -----------
+  df (DataFrame): cleaned data
+  diff (boolean, default True): if true, performs test on differenced data, otherwise uses raw data
+  max_lag (int, default 7): max lag to use for granger causality test
 
-    df[mobility] = df[mobility].rolling(7, center=True).mean()
-    df[virus] = df[virus].rolling(7, center=True).mean()
+  Returns
+  -------
+  none
+  """
+def granger_test(df, diff=True, max_lag=7):
+    if diff:
+        x = np.diff(df["mobility_retail_and_recreation"])[1:]
+        y = np.diff(df["stringency_index"])[1:]
+        data = {"x": x, "y": y}
+        data_df = pd.DataFrame(data)
+        grangercausalitytests(data_df, maxlag=7)
+    else:
+        grangercausalitytests(df[["mobility_retail_and_recreation", "stringency_index"]], maxlag=max_lag)
 
 if __name__ == "__main__":
-    mobility = ["mobility_retail_and_recreation", "mobility_grocery_and_pharmacy", "mobility_parks", "mobility_transit_stations", "mobility_workplaces", "mobility_residential"]
-    restrictions = ["school_closing", "workplace_closing", "cancel_public_events","restrictions_on_gatherings", "public_transport_closing", "stay_at_home_requirements", "restrictions_on_internal_movement", "stringency_index"]
-    virus = ["new_confirmed", "cumulative_persons_fully_vaccinated"]
-
+    #download and clean US dataset
     data_key = "US"
     df = pd.read_csv(f'https://storage.googleapis.com/covid19-open-data/v3/location/{data_key}.csv', parse_dates=["date"], index_col="date")
-    df=df[mobility+restrictions+virus]
-    clean_data(df)
+    df = clean_data(df)
 
+    #uses data from Feb. 25 2020 to June 1 2021 because no missing data allowed for test
     date_window = pd.date_range(start = "2020-02-25", end = "2021-06-1")
     df_test=df.loc[date_window,:]
 
-    #grangercausalitytests(df_test[["mobility_retail_and_recreation", "stringency_index"]], maxlag=7)
-
-    x = np.diff(df_test["mobility_retail_and_recreation"])[1:]
-    y = np.diff(df_test["stringency_index"])[1:]
-    data = {"x": x, "y": y}
-    data_df = pd.DataFrame(data)
-
-    grangercausalitytests(data_df, maxlag=7)
+    #perform granger causality test
+    granger_test(df_test, True, 7)
