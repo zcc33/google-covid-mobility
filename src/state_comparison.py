@@ -5,7 +5,7 @@ import numpy as np
 from clean_data import clean_data
 
 """
-  Calculates state's immobility index - a single number representing how much social
+  Calculate state's immobility index - a single number representing how much social
   mobility declined during the COVID pandemic.
 
   The following mobility variables were used:
@@ -58,7 +58,7 @@ def immobility_scores(df):
     df["immobility_score"] = round((df["immobility_index"]/df["immobility_index"].min())*100, 1)
 
 """
-  Renders the contents of a DataFrame as an image in table format. It turns out there's no
+  Render the contents of a DataFrame as an image in table format. It turns out there's no
   built-in way to do this. Credit for this function goes to the following StackExchange thread:
   https://stackoverflow.com/questions/19726663/how-to-save-the-pandas-dataframe-series-data-as-a-figure
 
@@ -95,13 +95,13 @@ def render_mpl_table(data, col_width=3.0, row_height=0.625, font_size=14,
     return ax.get_figure(), ax
 
 """
-Compares the 50 US states by how immobile they became as a result of the COVID pandemic.
-First claculates an immobility index for each state based on mobility variables. Then an immobility score.
-See function descriptions above for how each is calculated.
+Compare the 50 US states by how immobile they became as a result of the COVID pandemic.
+First calculate an immobility index for each state based on mobility variables. Then an immobility score.
+See function descriptions above for details.
 
-Sorts the states by immobility score (most immobile first) and saves the dataframe as image in table format.
+Sort the states by immobility score (most immobile first) and saves the dataframe as image in table format.
 
-Saves entire table, top 10 states, and bottom 10 states as:
+Save entire table, top 10 states, and bottom 10 states as:
 ../img/state_comparison.png
 ../img/state_comparison_head.png
 ../img/state_comparison_tail.png

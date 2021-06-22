@@ -6,7 +6,7 @@ from clean_data import clean_data
 from statsmodels.tsa.stattools import grangercausalitytests
 
 """
-  Performs granger causality test on whether stringency_index contains predictive information
+  Perform granger causality test on whether stringency_index contains predictive information
   about mobility_retail_and_recreation. Contains option to perform test on differenced data to
   reduce non-stationarity.
 

@@ -5,12 +5,12 @@ import numpy as np
 from clean_data import clean_data
 
 """
-Makes MD-specific plots showing:
+Make MD-specific plots showing:
     1. Retail mobility vs. new COVID cases
     2. Residential mobility vs. stringency index
     3. Transity mobility vs. cumulative vaccinations
 
-Saves all 3 plots as single image in ../img/md_mobility_specific.png
+Save all 3 plots as single image in ../img/md_mobility_specific.png
 """
 
 if __name__ == "__main__":

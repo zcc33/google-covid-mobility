@@ -5,7 +5,7 @@ import numpy as np
 from clean_data import clean_data
 
 """
-Creates plot of overall mobility trends for the US during the COVID outbreak.
+Create plot of overall mobility trends for the US during the COVID outbreak.
 
 Variables are daily time series representing percentage change from baseline (January 2020). Percentage
 change is calculated by day of the week. Note the heavy influence of seasonality since baseline was during
