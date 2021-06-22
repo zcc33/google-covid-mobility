@@ -18,7 +18,7 @@ The COVID-19 outbreak disrupted almost every aspect of people's lives, and nowhe
 
 ## Description of Data <a name ="description"> </a>
 
-The COVID-19 Open Data Set contains daily time series data of over 500 variables for over 20,000 locations. We mainly focused on the subset of US states and the variables related to mobility trends. We additionally looked at some other variables such as `stringency_index`, which summarizes the degree of enforced distancing imposed by a region's government. The entire dataset is stored on the Google Cloud Platform and can be freely queried [there](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=covid19_open_data) using SQL. Location-specific subsets be downloaded by using a specific location key, such as `US` for the entire United States, and `US_MD` for the state of Maryland.
+The COVID-19 Open Data Set contains daily time series data of over 500 variables for over 20,000 locations. We focused on the overall US and states and features related to mobility trends. We additionally looked at variables such as `stringency_index`, which summarizes the degree of enforced distancing imposed by a region's government. The entire dataset is stored on the Google Cloud Platform and can be freely queried [there](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=covid19_open_data) using SQL. Location-specific subsets be downloaded by using a specific location key, such as `US` for the entire United States, and `US_MD` for the state of Maryland.
 
  Descriptions of the mobility data can be found [here](https://github.com/GoogleCloudPlatform/covid-19-open-data/blob/main/docs/table-mobility.md) and [here](https://www.google.com/covid19/mobility/).  Descriptions of the stringency index and its associated governmental measures can be found [here](https://github.com/GoogleCloudPlatform/covid-19-open-data/blob/main/docs/table-government-response.md).
 
@@ -41,27 +41,49 @@ The COVID-19 Open Data Set contains daily time series data of over 500 variables
 3. Location categorizations and accuracy are somewhat region-specific. One should be careful about directly comparing regions which are far apart and/or very different in culture.
 
 ## Data Processing <a name ="processing"> </a>
-The processing of the data could be roken dow
+We processed the data as follows:
 
-1. Time series Smoothing - The mobility data 
-2. Missing Values Interpolation - 
-3. 
+1. **Time series smoothing** - We noticed the data exhibited a large amount of choppiness by day of the week, particularly between weekdays and weekends. This makes sense beacuse the mobility data were calculated with reference to a specific day of the week. So we took a 7-day moving average to smooth out the bumpiness.
+2. **Interpolate/forward-fill missing values** - There were a lot of single missing values in the mobility variables, which we interpolated from surrounding values. There were also slightly longer chunks of missing values in stringency index, which we we forward-filled from preceding values.
+3. **Remove extreme outliers (reporting errors)** - We forward-filled occasional extreme outliers (95%+ drops) in variables like cumulative vaccinated and confirmed cases. These were likely reporting errors, which got corrected by the next reporting day, but which were causing large irregularities when graphed.
 
 
 ## Overall Mobility Trends (US) <a name ="overall"> </a>
 
-When graphing the overall mobility trends for the US, we see that 
+To illustrate general trends, we plotted US mobility variables over the entire duration of the outbreak. Note the baseline period shaded in red. 
+
 ![](img/us_mobility_all.png)
+
+Some observations:
+
+* **Retail/grocery/transit/workplace** mobility are highly correlated, dipping sharply at the outset of the pandemic, recovering somewhat and remaining significantly below baseline into the present day. It appears grocery mobility (labeled in orange) spiked for a few days as people went out to stock up on supplies in the very early days. Grocery mobility seems to be least affected by the pandemic, since people still need to buy food and essentials. Retail and recreation seems to have made a decent recovery. Workplaces and transit stations were the hardest hit and remain flat into the present day.
+* **Residential**: This was the only variable that measured change in total time spent, rather than number of visits. As one would expect, reduced mobility in the other categories correponds with increase in residential mobility. Since it's a percentage change in total time spent, this variable is inherently capped. There's only 24 hours in a day and people already spent a considerable amount of their time at home before the pandemic.
+* **Parks**: This was an idiosyncratic category. Since parks do not contribute as much to virus spread, it's likely that park mobility would increase as a substite for other activities. At the same time, parks are the most influenced by seasonality of weather. Since the baseline was in January, we would naturally expect park attendance to increase dramatically moving into summer. What we see is a slight dip in the beginning along with everything else, and then a sustained rise throughout the warmer months. Park attendance was noticeably down in January 2021, which removes the effects of seasonality, so perhaps the effect of the pandemic on park attendance is in fact negative.
 
 
 ## State-Level Example (MD) <a name ="state"> </a>
 
+We explored state-level data (Maryland) and plot some revelant mobility trends against variables associated with lockdowns and the virus spread.
+
 ![](img/md_mobility_specific.png)
 
-## Comparison of Immobility Across States <a name ="comparison"> </a>
 
+**Retail Mobility vs. New Cases** - Retail mobility seems to 
+
+**Residential Mobility vs. Stringency Index** - We see a remarkablly strong correspondence between residential mobility and stringency index. As stringency rose and then gradually declined into the pandemic, we see the amount of time spent at home rose sharply and then gradually declined in unison. The amount of time people spend at home seems an excellent reflection of an area's stringency index.
+
+**Transit Mobility vs. Total Vaccinations** - Even as the number of vaccinations rises into the millions, transit mobility is still 30% below baseline. We can see a slight reecovery in this time frame, but this could simply be due to seasonality. It appears that people getting vaccinated is not leading them to return to transit stations.
+
+
+## Comparison of Immobility Across States <a name ="comparison"> </a>
+We 
 ![](img/state_comparison_head.png)
+
+
 ![](img/state_comparison_tail.png)
+
+See full table [here](img/state_comparison.png)
+
 
 ## Hypothesis Testing for Granger causuality <a name ="testing"> </a>
 In general it's difficult to conduct hypothesis tests on time series because the data points are not independent of each other. However, there is a testable notion called "Granger causality" which was developed specifically for time series. 
@@ -95,10 +117,6 @@ We see that all the p-values are low enough to reject the null hypothesis indivi
 ## Future Work <a name ="future"> </a>
 1. It would be interesting
 2.  
-
-&nbsp;
-&nbsp;
-<br></br>
 
 ## References
 
