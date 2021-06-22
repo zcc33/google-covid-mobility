@@ -9,7 +9,7 @@
 5. [State-Level Example (MD)](#state)
 7. [Comparison of Immobility Across States](#comparison)
 8. [Hypothesis Testing for "Granger Causality"](#testing)
-9. [Future Work](#future)
+9. [Conclusions and Future Work](#future)
 
 
 
@@ -58,31 +58,40 @@ Some observations:
 
 * **Retail/grocery/transit/workplace** mobility are highly correlated, dipping sharply at the outset of the pandemic, recovering somewhat and remaining significantly below baseline into the present day. It appears grocery mobility (labeled in orange) spiked for a few days as people went out to stock up on supplies in the very early days. Grocery mobility seems to be least affected by the pandemic, since people still need to buy food and essentials. Retail and recreation seems to have made a decent recovery. Workplaces and transit stations were the hardest hit and remain flat into the present day.
 * **Residential**: This was the only variable that measured change in total time spent, rather than number of visits. As one would expect, reduced mobility in the other categories correponds with increase in residential mobility. Since it's a percentage change in total time spent, this variable is inherently capped. There's only 24 hours in a day and people already spent a considerable amount of their time at home before the pandemic.
-* **Parks**: This was an idiosyncratic category. Since parks do not contribute as much to virus spread, it's likely that park mobility would increase as a substite for other activities. At the same time, parks are the most influenced by seasonality of weather. Since the baseline was in January, we would naturally expect park attendance to increase dramatically moving into summer. What we see is a slight dip in the beginning along with everything else, and then a sustained rise throughout the warmer months. Park attendance was noticeably down in January 2021, which removes the effects of seasonality, so perhaps the effect of the pandemic on park attendance is in fact negative.
+* **Parks**: This was an idiosyncratic category. Since parks do not contribute as much to virus spread, it's likely that park mobility would increase as a substite for other activities. At the same time, parks are the most influenced by seasonality of weather. Since the baseline was in January, we would naturally expect park attendance to increase dramatically moving into summer. What we see is a slight dip in the beginning along with everything else, and then a sustained rise throughout the warmer months. Park attendance was noticeably down in January 2021, without the effects of seasonality, so perhaps the effect of the pandemic on park attendance is in fact negative.
 
 
 ## State-Level Example (MD) <a name ="state"> </a>
 
-We explored state-level data (Maryland) and plot some revelant mobility trends against variables associated with lockdowns and the virus spread.
+We explored state-level data for Maryland and plot some mobility trends against variables associated with lockdowns and the virus spread.
 
 ![](img/md_mobility_specific.png)
 
 
-**Retail Mobility vs. New Cases** - Retail mobility seems to 
+**Retail Mobility vs. New Cases** - Retail mobility seems loosely related to the number of new cases (note this is not cumulative). Retail mobility 
 
-**Residential Mobility vs. Stringency Index** - We see a remarkablly strong correspondence between residential mobility and stringency index. As stringency rose and then gradually declined into the pandemic, we see the amount of time spent at home rose sharply and then gradually declined in unison. The amount of time people spend at home seems an excellent reflection of an area's stringency index.
+**Residential Mobility vs. Stringency Index** - There's a remarkablly strong correspondence between residential mobility and stringency index. As stringency rose and then gradually declined into the pandemic, the amount of time spent at home rose sharply and then gradually declined in unison. The amount of time people spend at home seems an excellent reflection of an area's stringency index.
 
-**Transit Mobility vs. Total Vaccinations** - Even as the number of vaccinations rises into the millions, transit mobility is still 30% below baseline. We can see a slight reecovery in this time frame, but this could simply be due to seasonality. It appears that people getting vaccinated is not leading them to return to transit stations.
+**Transit Mobility vs. Total Vaccinations** - While the number of vaccinations rose into the millions, transit mobility is still 30% below baseline. We can see a slight reecovery, but this could also just be due to seasonality. It appears that people getting vaccinated is not leading them to return to transit stations, at least anytime soon.
 
 
 ## Comparison of Immobility Across States <a name ="comparison"> </a>
-We 
+We wanted to compare how different states' movement patterns were affected by the pandemic. More specifically, which states had the most reduced mobility? To this effect, we introduced an immobility index which took the average of retail/grocery/workplace/transit variables across the following 4 weeks:
+
+> 1. The 2 weeks following the date of max stringency index. This reflects the immediate and most acute response to the pandemic.
+> 2. The 2 weeks in the middle of January 2021. This serves as a direct comparison with the baseline, removing effects of seasonality.
+
+Then we normalized to get an immobility score, where the most immobile state gets a maximum score of 100.
+
 ![](img/state_comparison_head.png)
 
+We see that the most immobile states were largely
 
 ![](img/state_comparison_tail.png)
 
-See full table [here](img/state_comparison.png)
+The l
+
+See the full table [here](img/state_comparison.png).
 
 
 ## Hypothesis Testing for Granger causuality <a name ="testing"> </a>
@@ -114,8 +123,11 @@ To conduct the test, we used the `grangercausalitytests` function from the `stat
 We see that all the p-values are low enough to reject the null hypothesis individually. However, for the raw series with a time lag of 1, the p-value is 0.03, which although less than 0.05, would not allow us to reject after performing a Boneferroni correction for conducting multiplie comparisons. Therefore, we cannot reject the null hypothesis; however tempting, we cannot claim that stringency index Granger-causes retail mobility.
 
 
-## Future Work <a name ="future"> </a>
-1. It would be interesting
+## Conclusions and Future Work <a name ="future"> </a>
+
+WEwe
+
+1. 
 2.  
 
 ## References
