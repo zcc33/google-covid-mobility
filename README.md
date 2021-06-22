@@ -68,30 +68,30 @@ We explored state-level data for Maryland and plot some mobility trends against 
 ![](img/md_mobility_specific.png)
 
 
-**Retail Mobility vs. New Cases** - Retail mobility seems loosely related to the number of new cases (note this is not cumulative). Retail mobility 
+**Retail Mobility vs. New Cases** - Retail mobility seems loosely related to the number of new cases. Retail mobility plummeted in the early days of the pandemic, butbegan recovering even as new cases reached a local maximum around May/April 2020. As new cases skyrocketed and peaked in the winter of 2020/2021, retail mobility began declining but never to the levels seen in the early days of the pandemic. More recently, as new cases has fallen precipitously, retail mobility is steadily climbing and has almost reached baseline.
 
-**Residential Mobility vs. Stringency Index** - There's a remarkablly strong correspondence between residential mobility and stringency index. As stringency rose and then gradually declined into the pandemic, the amount of time spent at home rose sharply and then gradually declined in unison. The amount of time people spend at home seems an excellent reflection of an area's stringency index.
+**Residential Mobility vs. Stringency Index** - There is an almost perfect correspondence between residential mobility and stringency index. As stringency rose and gradually declined into the pandemic, the amount of time spent at home seems to have followed in unison. Perhaps lockdown policies are indeed effective and can be seen most clearly in residential mobility.
 
-**Transit Mobility vs. Total Vaccinations** - While the number of vaccinations rose into the millions, transit mobility is still 30% below baseline. We can see a slight reecovery, but this could also just be due to seasonality. It appears that people getting vaccinated is not leading them to return to transit stations, at least anytime soon.
+**Transit Mobility vs. Total Vaccinations** - While the number of vaccinations has skyrocketed into the millions, transit mobility is lagging at -30% off baseline. It doesn't seem likely to make a full recovery anytime soon. So while people are getting vaccinated, they aren't ready yet to return to transit stations.
 
 
 ## Comparison of Immobility Across States <a name ="comparison"> </a>
-We wanted to compare how different states' movement patterns were affected by the pandemic. More specifically, which states had the most reduced mobility? To this effect, we introduced an immobility index which took the average of retail/grocery/workplace/transit variables across the following 4 weeks:
+We wanted to compare how different states' movement patterns were affected by the pandemic. More specifically, which states had the most reduced mobility? To this effect, we introduced an `immobility_index` which took the average of retail/grocery/workplace/transit variables across the following 4 weeks:
 
 > 1. The 2 weeks following the date of max stringency index. This reflects the immediate and most acute response to the pandemic.
 > 2. The 2 weeks in the middle of January 2021. This serves as a direct comparison with the baseline, removing effects of seasonality.
 
-Then we normalized to get an immobility score, where the most immobile state gets a maximum score of 100.
+Then we normalized to get an `immobility_score`. The most immobile state gets a maximum score of 100.
 
 ![](img/state_comparison_head.png)
 
-We see that the most immobile states were largely
+The most immobile states are Massachusetts, New York, New Jersey, etc. We see almost entirely Northeastern and Pacific West Coast states. They are mostly larger, urban, and more densely populated. This makes sense. States that have a larger population and density have a greater need to practice social distancing to prevent virus spread.
 
 ![](img/state_comparison_tail.png)
 
-The l
+The bottom 10 states include Mississippi, Wyoming, Arkansas, etc. We see mostly rural states from the South and Mountain West. Accordingly, their lower population densities allows for reduced social distancing measures. There may also be cultural and political factors at play. Their immobility indices (-20%) show their movement reductions were roughly half that of the top 10 immobile states (-40%).
 
-See the full table [here](img/state_comparison.png).
+To see the full table, click [here](img/state_comparison.png).
 
 
 ## Hypothesis Testing for Granger causuality <a name ="testing"> </a>
