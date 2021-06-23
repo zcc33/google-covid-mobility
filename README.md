@@ -137,7 +137,7 @@ We created an immobility score to compare reductions in mobility among states. W
 
 Hypothesis testing for Granger causality showed that stringency index contains predictive information about retail mobility, which accords with our intutions about the lockdown measures having an effect on people's discretionary movement patterns.
 
-Future work could be done to apply additional time series methods to analyzing the mobility trends. More attention should be paid to the assumptions and interpretations of the Granger causality testing, and how the lag values are chosen. Annother interesting direction would be investigating the length of delay, or lag, between various virus indicators and mobility reduction, or between stringency index and mobility reduction, both within states and across states.
+In future work, we would like to apply additional time series methods to the data. More attention should be paid to the assumptions of the Granger causality testing, and how the lag values are chosen. Annother interesting direction would be investigating the length of delay, or lag, between various virus indicators and mobility reduction, or between stringency index and mobility reduction, both within states and across states.
 ## References
 
 1. https://console.cloud.google.com/marketplace/product/bigquery-public-datasets/covid19-open-data
